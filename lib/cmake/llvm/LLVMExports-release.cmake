@@ -784,6 +784,56 @@ set_target_properties(LLVMBPFInfo PROPERTIES
 list(APPEND _IMPORT_CHECK_TARGETS LLVMBPFInfo )
 list(APPEND _IMPORT_CHECK_FILES_FOR_LLVMBPFInfo "${_IMPORT_PREFIX}/lib/libLLVMBPFInfo.a" )
 
+# Import target "LLVMHexagonCodeGen" for configuration "Release"
+set_property(TARGET LLVMHexagonCodeGen APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
+set_target_properties(LLVMHexagonCodeGen PROPERTIES
+  IMPORTED_LINK_INTERFACE_LANGUAGES_RELEASE "CXX"
+  IMPORTED_LOCATION_RELEASE "${_IMPORT_PREFIX}/lib/libLLVMHexagonCodeGen.a"
+  )
+
+list(APPEND _IMPORT_CHECK_TARGETS LLVMHexagonCodeGen )
+list(APPEND _IMPORT_CHECK_FILES_FOR_LLVMHexagonCodeGen "${_IMPORT_PREFIX}/lib/libLLVMHexagonCodeGen.a" )
+
+# Import target "LLVMHexagonAsmParser" for configuration "Release"
+set_property(TARGET LLVMHexagonAsmParser APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
+set_target_properties(LLVMHexagonAsmParser PROPERTIES
+  IMPORTED_LINK_INTERFACE_LANGUAGES_RELEASE "CXX"
+  IMPORTED_LOCATION_RELEASE "${_IMPORT_PREFIX}/lib/libLLVMHexagonAsmParser.a"
+  )
+
+list(APPEND _IMPORT_CHECK_TARGETS LLVMHexagonAsmParser )
+list(APPEND _IMPORT_CHECK_FILES_FOR_LLVMHexagonAsmParser "${_IMPORT_PREFIX}/lib/libLLVMHexagonAsmParser.a" )
+
+# Import target "LLVMHexagonDisassembler" for configuration "Release"
+set_property(TARGET LLVMHexagonDisassembler APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
+set_target_properties(LLVMHexagonDisassembler PROPERTIES
+  IMPORTED_LINK_INTERFACE_LANGUAGES_RELEASE "CXX"
+  IMPORTED_LOCATION_RELEASE "${_IMPORT_PREFIX}/lib/libLLVMHexagonDisassembler.a"
+  )
+
+list(APPEND _IMPORT_CHECK_TARGETS LLVMHexagonDisassembler )
+list(APPEND _IMPORT_CHECK_FILES_FOR_LLVMHexagonDisassembler "${_IMPORT_PREFIX}/lib/libLLVMHexagonDisassembler.a" )
+
+# Import target "LLVMHexagonDesc" for configuration "Release"
+set_property(TARGET LLVMHexagonDesc APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
+set_target_properties(LLVMHexagonDesc PROPERTIES
+  IMPORTED_LINK_INTERFACE_LANGUAGES_RELEASE "CXX"
+  IMPORTED_LOCATION_RELEASE "${_IMPORT_PREFIX}/lib/libLLVMHexagonDesc.a"
+  )
+
+list(APPEND _IMPORT_CHECK_TARGETS LLVMHexagonDesc )
+list(APPEND _IMPORT_CHECK_FILES_FOR_LLVMHexagonDesc "${_IMPORT_PREFIX}/lib/libLLVMHexagonDesc.a" )
+
+# Import target "LLVMHexagonInfo" for configuration "Release"
+set_property(TARGET LLVMHexagonInfo APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
+set_target_properties(LLVMHexagonInfo PROPERTIES
+  IMPORTED_LINK_INTERFACE_LANGUAGES_RELEASE "CXX"
+  IMPORTED_LOCATION_RELEASE "${_IMPORT_PREFIX}/lib/libLLVMHexagonInfo.a"
+  )
+
+list(APPEND _IMPORT_CHECK_TARGETS LLVMHexagonInfo )
+list(APPEND _IMPORT_CHECK_FILES_FOR_LLVMHexagonInfo "${_IMPORT_PREFIX}/lib/libLLVMHexagonInfo.a" )
+
 # Import target "LLVMMipsCodeGen" for configuration "Release"
 set_property(TARGET LLVMMipsCodeGen APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
 set_target_properties(LLVMMipsCodeGen PROPERTIES
