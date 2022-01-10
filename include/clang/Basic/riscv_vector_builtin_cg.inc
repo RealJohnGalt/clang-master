@@ -1413,19 +1413,19 @@ case RISCVVector::BI__builtin_rvv_vloxseg8ei64_v_m:
       return V;
     }
             break;
-case RISCVVector::BI__builtin_rvv_vlse8_v:
-case RISCVVector::BI__builtin_rvv_vlse16_v:
 case RISCVVector::BI__builtin_rvv_vlse32_v:
 case RISCVVector::BI__builtin_rvv_vlse64_v:
+case RISCVVector::BI__builtin_rvv_vlse8_v:
+case RISCVVector::BI__builtin_rvv_vlse16_v:
   ID = Intrinsic::riscv_vlse;
 
         IntrinsicTypes = {ResultType, Ops[2]->getType()};
         Ops[0] = Builder.CreateBitCast(Ops[0], ResultType->getPointerTo());
       break;
-case RISCVVector::BI__builtin_rvv_vlse8_v_m:
-case RISCVVector::BI__builtin_rvv_vlse16_v_m:
 case RISCVVector::BI__builtin_rvv_vlse32_v_m:
 case RISCVVector::BI__builtin_rvv_vlse64_v_m:
+case RISCVVector::BI__builtin_rvv_vlse8_v_m:
+case RISCVVector::BI__builtin_rvv_vlse16_v_m:
   ID = Intrinsic::riscv_vlse_mask;
 
         // Move mask to right before vl.
@@ -1493,8 +1493,8 @@ case RISCVVector::BI__builtin_rvv_vlseg2e64_v_m:
             break;
 case RISCVVector::BI__builtin_rvv_vlseg2e16ff_v:
 case RISCVVector::BI__builtin_rvv_vlseg2e32ff_v:
-case RISCVVector::BI__builtin_rvv_vlseg2e8ff_v:
 case RISCVVector::BI__builtin_rvv_vlseg2e64ff_v:
+case RISCVVector::BI__builtin_rvv_vlseg2e8ff_v:
   ID = Intrinsic::riscv_vlseg2ff;
   NF = 2;
 
@@ -1520,8 +1520,8 @@ case RISCVVector::BI__builtin_rvv_vlseg2e64ff_v:
             break;
 case RISCVVector::BI__builtin_rvv_vlseg2e16ff_v_m:
 case RISCVVector::BI__builtin_rvv_vlseg2e32ff_v_m:
-case RISCVVector::BI__builtin_rvv_vlseg2e8ff_v_m:
 case RISCVVector::BI__builtin_rvv_vlseg2e64ff_v_m:
+case RISCVVector::BI__builtin_rvv_vlseg2e8ff_v_m:
   ID = Intrinsic::riscv_vlseg2ff_mask;
   NF = 2;
 
@@ -2260,8 +2260,8 @@ case RISCVVector::BI__builtin_rvv_vlseg8e64ff_v_m:
                                  Address(NewVL, Align));
     }
             break;
-case RISCVVector::BI__builtin_rvv_vlsseg2e8_v:
 case RISCVVector::BI__builtin_rvv_vlsseg2e16_v:
+case RISCVVector::BI__builtin_rvv_vlsseg2e8_v:
 case RISCVVector::BI__builtin_rvv_vlsseg2e32_v:
 case RISCVVector::BI__builtin_rvv_vlsseg2e64_v:
   ID = Intrinsic::riscv_vlsseg2;
@@ -2285,8 +2285,8 @@ case RISCVVector::BI__builtin_rvv_vlsseg2e64_v:
       return V;
     }
             break;
-case RISCVVector::BI__builtin_rvv_vlsseg2e8_v_m:
 case RISCVVector::BI__builtin_rvv_vlsseg2e16_v_m:
+case RISCVVector::BI__builtin_rvv_vlsseg2e8_v_m:
 case RISCVVector::BI__builtin_rvv_vlsseg2e32_v_m:
 case RISCVVector::BI__builtin_rvv_vlsseg2e64_v_m:
   ID = Intrinsic::riscv_vlsseg2_mask;
@@ -2667,18 +2667,18 @@ case RISCVVector::BI__builtin_rvv_vlsseg8e64_v_m:
     }
             break;
 case RISCVVector::BI__builtin_rvv_vluxei8_v:
+case RISCVVector::BI__builtin_rvv_vluxei64_v:
 case RISCVVector::BI__builtin_rvv_vluxei16_v:
 case RISCVVector::BI__builtin_rvv_vluxei32_v:
-case RISCVVector::BI__builtin_rvv_vluxei64_v:
   ID = Intrinsic::riscv_vluxei;
 
         IntrinsicTypes = {ResultType, Ops[1]->getType(), Ops[2]->getType()};
         Ops[0] = Builder.CreateBitCast(Ops[0], ResultType->getPointerTo());
       break;
 case RISCVVector::BI__builtin_rvv_vluxei8_v_m:
+case RISCVVector::BI__builtin_rvv_vluxei64_v_m:
 case RISCVVector::BI__builtin_rvv_vluxei16_v_m:
 case RISCVVector::BI__builtin_rvv_vluxei32_v_m:
-case RISCVVector::BI__builtin_rvv_vluxei64_v_m:
   ID = Intrinsic::riscv_vluxei_mask;
 
         // Move mask to right before vl.
@@ -4727,8 +4727,8 @@ case RISCVVector::BI__builtin_rvv_vsub_vx_m:
   break;
 case RISCVVector::BI__builtin_rvv_vsuxei16_v:
 case RISCVVector::BI__builtin_rvv_vsuxei32_v:
-case RISCVVector::BI__builtin_rvv_vsuxei64_v:
 case RISCVVector::BI__builtin_rvv_vsuxei8_v:
+case RISCVVector::BI__builtin_rvv_vsuxei64_v:
   ID = Intrinsic::riscv_vsuxei;
 
         // Builtin: (ptr, index, value, vl). Intrinsic: (value, ptr, index, vl)
@@ -4738,8 +4738,8 @@ case RISCVVector::BI__builtin_rvv_vsuxei8_v:
       break;
 case RISCVVector::BI__builtin_rvv_vsuxei16_v_m:
 case RISCVVector::BI__builtin_rvv_vsuxei32_v_m:
-case RISCVVector::BI__builtin_rvv_vsuxei64_v_m:
 case RISCVVector::BI__builtin_rvv_vsuxei8_v_m:
+case RISCVVector::BI__builtin_rvv_vsuxei64_v_m:
   ID = Intrinsic::riscv_vsuxei_mask;
 
         // Builtin: (mask, ptr, index, value, vl). Intrinsic: (value, ptr, index, mask, vl)
