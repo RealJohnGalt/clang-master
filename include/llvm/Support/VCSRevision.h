@@ -1,2 +1,2 @@
-#define LLVM_REVISION "0696ad95636c49e653a545a2104aea5ba5a9ce3f"
+#define LLVM_REVISION "b699e8b11aa92ca4fcade2616d4a4bbc1d3a717e"
 #define LLVM_REPOSITORY "https://github.com/llvm/llvm-project"

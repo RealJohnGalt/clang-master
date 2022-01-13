@@ -3264,6 +3264,8 @@ bool VISITORCLASS<Derived>::TraverseOMPDeclareTargetDeclAttr(OMPDeclareTargetDec
     return false;
   if (!getDerived().VisitOMPDeclareTargetDeclAttr(A))
     return false;
+  if (!getDerived().TraverseStmt(A->getIndirectExpr()))
+    return false;
   return true;
 }
 

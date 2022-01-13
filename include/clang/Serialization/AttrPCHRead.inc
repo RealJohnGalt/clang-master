@@ -2092,8 +2092,10 @@
     bool isPackExpansion = Record.readInt();
     OMPDeclareTargetDeclAttr::MapTypeTy mapType(static_cast<OMPDeclareTargetDeclAttr::MapTypeTy>(Record.readInt()));
     OMPDeclareTargetDeclAttr::DevTypeTy devType(static_cast<OMPDeclareTargetDeclAttr::DevTypeTy>(Record.readInt()));
+    Expr * indirectExpr = Record.readExpr();
+    bool indirect = Record.readInt();
     unsigned level = Record.readInt();
-    New = new (Context) OMPDeclareTargetDeclAttr(Context, Info, mapType, devType, level);
+    New = new (Context) OMPDeclareTargetDeclAttr(Context, Info, mapType, devType, indirectExpr, indirect, level);
     cast<InheritableAttr>(New)->setInherited(isInherited);
     New->setImplicit(isImplicit);
     New->setPackExpansion(isPackExpansion);

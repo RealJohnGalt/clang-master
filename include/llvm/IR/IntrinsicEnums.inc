@@ -338,6 +338,7 @@
     vp_gather,                                 // llvm.vp.gather
     vp_load,                                   // llvm.vp.load
     vp_lshr,                                   // llvm.vp.lshr
+    vp_merge,                                  // llvm.vp.merge
     vp_mul,                                    // llvm.vp.mul
     vp_or,                                     // llvm.vp.or
     vp_reduce_add,                             // llvm.vp.reduce.add
@@ -367,4 +368,4 @@
     write_register,                            // llvm.write_register
     xray_customevent,                          // llvm.xray.customevent
     xray_typedevent,                           // llvm.xray.typedevent
-    num_intrinsics = 10702
+    num_intrinsics = 10704

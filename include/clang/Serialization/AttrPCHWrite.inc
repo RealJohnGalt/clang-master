@@ -1478,6 +1478,8 @@ Record.push_back(SA->getBranchState());
     Record.push_back(A->isPackExpansion());
 Record.push_back(SA->getMapType());
 Record.push_back(SA->getDevType());
+    Record.AddStmt(SA->getIndirectExpr());
+    Record.push_back(SA->getIndirect());
     Record.push_back(SA->getLevel());
     break;
   }

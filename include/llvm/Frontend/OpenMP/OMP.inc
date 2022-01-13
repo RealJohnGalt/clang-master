@@ -93,6 +93,7 @@ namespace omp {
     llvm::omp::Clause::OMPC_to,
     llvm::omp::Clause::OMPC_link,
     llvm::omp::Clause::OMPC_device_type,
+    llvm::omp::Clause::OMPC_indirect,
   };
 
   static OmpClauseSet allowedOnceClauses_OMPD_begin_declare_target {
@@ -216,6 +217,7 @@ namespace omp {
   static OmpClauseSet allowedClauses_OMPD_declare_target {
     llvm::omp::Clause::OMPC_to,
     llvm::omp::Clause::OMPC_link,
+    llvm::omp::Clause::OMPC_indirect,
   };
 
   static OmpClauseSet allowedOnceClauses_OMPD_declare_target {
@@ -3118,6 +3120,7 @@ WRAPPER_CLASS(If, OmpIfClause);
 EMPTY_CLASS(InReduction);
 EMPTY_CLASS(Inbranch);
 EMPTY_CLASS(Inclusive);
+EMPTY_CLASS(Indirect);
 EMPTY_CLASS(Init);
 WRAPPER_CLASS(IsDevicePtr, std::list<Name>);
 WRAPPER_CLASS(Lastprivate, OmpObjectList);
@@ -3216,6 +3219,7 @@ AcqRel
 , InReduction
 , Inbranch
 , Inclusive
+, Indirect
 , Init
 , IsDevicePtr
 , Lastprivate
@@ -3314,6 +3318,7 @@ NODE(OmpClause, If)
 NODE(OmpClause, InReduction)
 NODE(OmpClause, Inbranch)
 NODE(OmpClause, Inclusive)
+NODE(OmpClause, Indirect)
 NODE(OmpClause, Init)
 NODE(OmpClause, IsDevicePtr)
 NODE(OmpClause, Lastprivate)
@@ -3500,6 +3505,7 @@ void Unparse(const OmpClause::If &x) {
 void Before(const OmpClause::InReduction &) { Word("IN_REDUCTION"); }
 void Before(const OmpClause::Inbranch &) { Word("INBRANCH"); }
 void Before(const OmpClause::Inclusive &) { Word("INCLUSIVE"); }
+void Before(const OmpClause::Indirect &) { Word("INDIRECT"); }
 void Before(const OmpClause::Init &) { Word("INIT"); }
 void Unparse(const OmpClause::IsDevicePtr &x) {
   Word("IS_DEVICE_PTR");
@@ -3721,6 +3727,7 @@ void Enter(const parser::OmpClause::If &);
 void Enter(const parser::OmpClause::InReduction &);
 void Enter(const parser::OmpClause::Inbranch &);
 void Enter(const parser::OmpClause::Inclusive &);
+void Enter(const parser::OmpClause::Indirect &);
 void Enter(const parser::OmpClause::Init &);
 void Enter(const parser::OmpClause::IsDevicePtr &);
 void Enter(const parser::OmpClause::Lastprivate &);
@@ -3858,6 +3865,8 @@ if constexpr (std::is_same_v<A, parser::OmpClause::Inbranch>)
   return llvm::omp::Clause::OMPC_inbranch;
 if constexpr (std::is_same_v<A, parser::OmpClause::Inclusive>)
   return llvm::omp::Clause::OMPC_inclusive;
+if constexpr (std::is_same_v<A, parser::OmpClause::Indirect>)
+  return llvm::omp::Clause::OMPC_indirect;
 if constexpr (std::is_same_v<A, parser::OmpClause::Init>)
   return llvm::omp::Clause::OMPC_init;
 if constexpr (std::is_same_v<A, parser::OmpClause::IsDevicePtr>)
@@ -4033,6 +4042,7 @@ __CLAUSE(if, OMPIfClause)
 __CLAUSE(in_reduction, OMPInReductionClause)
 __CLAUSE_NO_CLASS(inbranch)
 __CLAUSE(inclusive, OMPInclusiveClause)
+__CLAUSE_NO_CLASS(indirect)
 __CLAUSE(init, OMPInitClause)
 __CLAUSE(is_device_ptr, OMPIsDevicePtrClause)
 __CLAUSE(lastprivate, OMPLastprivateClause)
@@ -4439,6 +4449,7 @@ Clause llvm::omp::getOpenMPClauseKind(llvm::StringRef Str) {
     .Case("in_reduction",OMPC_in_reduction)
     .Case("inbranch",OMPC_inbranch)
     .Case("inclusive",OMPC_inclusive)
+    .Case("indirect",OMPC_indirect)
     .Case("init",OMPC_init)
     .Case("is_device_ptr",OMPC_is_device_ptr)
     .Case("lastprivate",OMPC_lastprivate)
@@ -4575,6 +4586,8 @@ llvm::StringRef llvm::omp::getOpenMPClauseName(Clause Kind) {
       return "inbranch";
     case OMPC_inclusive:
       return "inclusive";
+    case OMPC_indirect:
+      return "indirect";
     case OMPC_init:
       return "init";
     case OMPC_is_device_ptr:
@@ -4848,6 +4861,8 @@ bool llvm::omp::isAllowedClauseForDirective(Directive D, Clause C, unsigned Vers
           return 1 <= Version && 2147483647 >= Version;
         case OMPC_device_type:
           return 1 <= Version && 2147483647 >= Version;
+        case OMPC_indirect:
+          return 1 <= Version && 2147483647 >= Version;
         default:
           return false;
       }
@@ -4908,6 +4923,8 @@ bool llvm::omp::isAllowedClauseForDirective(Directive D, Clause C, unsigned Vers
         case OMPC_to:
           return 1 <= Version && 2147483647 >= Version;
         case OMPC_link:
+          return 1 <= Version && 2147483647 >= Version;
+        case OMPC_indirect:
           return 1 <= Version && 2147483647 >= Version;
         default:
           return false;

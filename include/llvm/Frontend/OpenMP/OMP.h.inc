@@ -247,6 +247,7 @@ enum class Clause {
   OMPC_in_reduction,
   OMPC_inbranch,
   OMPC_inclusive,
+  OMPC_indirect,
   OMPC_init,
   OMPC_is_device_ptr,
   OMPC_lastprivate,
@@ -302,7 +303,7 @@ enum class Clause {
   OMPC_write,
 };
 
-static constexpr std::size_t Clause_enumSize = 92;
+static constexpr std::size_t Clause_enumSize = 93;
 
 constexpr auto OMPC_acq_rel = llvm::omp::Clause::OMPC_acq_rel;
 constexpr auto OMPC_acquire = llvm::omp::Clause::OMPC_acquire;
@@ -343,6 +344,7 @@ constexpr auto OMPC_if = llvm::omp::Clause::OMPC_if;
 constexpr auto OMPC_in_reduction = llvm::omp::Clause::OMPC_in_reduction;
 constexpr auto OMPC_inbranch = llvm::omp::Clause::OMPC_inbranch;
 constexpr auto OMPC_inclusive = llvm::omp::Clause::OMPC_inclusive;
+constexpr auto OMPC_indirect = llvm::omp::Clause::OMPC_indirect;
 constexpr auto OMPC_init = llvm::omp::Clause::OMPC_init;
 constexpr auto OMPC_is_device_ptr = llvm::omp::Clause::OMPC_is_device_ptr;
 constexpr auto OMPC_lastprivate = llvm::omp::Clause::OMPC_lastprivate;

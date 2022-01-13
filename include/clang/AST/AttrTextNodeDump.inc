@@ -549,6 +549,7 @@
       OS << " DT_Any";
       break;
     }
+    if (SA->getIndirect()) OS << " Indirect";
     OS << " " << SA->getLevel();
   }
   void VisitOMPDeclareVariantAttr(const OMPDeclareVariantAttr *A) {

@@ -13,8 +13,9 @@ namespace llvm {
 namespace Intrinsic {
 enum RISCVIntrinsics : unsigned {
 // Enum values for intrinsics
-    riscv_bcompress = 7242,                           // llvm.riscv.bcompress
+    riscv_bcompress = 7243,                           // llvm.riscv.bcompress
     riscv_bdecompress,                         // llvm.riscv.bdecompress
+    riscv_bfp,                                 // llvm.riscv.bfp
     riscv_clmul,                               // llvm.riscv.clmul
     riscv_clmulh,                              // llvm.riscv.clmulh
     riscv_clmulr,                              // llvm.riscv.clmulr

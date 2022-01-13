@@ -120,6 +120,10 @@
     for (OMPDeclareSimdDeclAttr::steps_iterator I = SA->steps_begin(), E = SA->steps_end(); I != E; ++I)
       Visit(*I);
   }
+  void VisitOMPDeclareTargetDeclAttr(const OMPDeclareTargetDeclAttr *A) {
+    const auto *SA = cast<OMPDeclareTargetDeclAttr>(A); (void)SA;
+    Visit(SA->getIndirectExpr());
+  }
   void VisitOMPDeclareVariantAttr(const OMPDeclareVariantAttr *A) {
     const auto *SA = cast<OMPDeclareVariantAttr>(A); (void)SA;
     Visit(SA->getVariantFuncRef());

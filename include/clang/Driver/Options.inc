@@ -538,6 +538,8 @@ OPTION(prefix_1, &"-enable-trivial-auto-var-init-zero-knowing-it-will-be-removed
        "Trivial automatic variable initialization to zero is only here for benchmarks, it'll eventually be removed, and I'm OK with that because I'm only using it to benchmark", nullptr, nullptr)
 OPTION(prefix_3, &"--encoding="[2], _encoding_EQ, Joined, INVALID, fencoding_EQ, nullptr, 0, 0, nullptr, nullptr, nullptr)
 OPTION(prefix_3, &"--encoding"[2], _encoding, Separate, INVALID, fencoding_EQ, nullptr, 0, 0, nullptr, nullptr, nullptr)
+OPTION(prefix_3, &"--end-no-unused-arguments"[2], end_no_unused_arguments, Flag, INVALID, INVALID, nullptr, CoreOption, 0,
+       "Start emitting warnings for unused driver arguments", nullptr, nullptr)
 OPTION(prefix_3, &"--entry"[2], _entry, Flag, INVALID, e, nullptr, 0, 0, nullptr, nullptr, nullptr)
 OPTION(prefix_1, &"-Eonly"[1], Eonly, Flag, Action_Group, INVALID, nullptr, CC1Option | NoDriverOption, 0,
        "Just run preprocessor, no output (for timings)", nullptr, nullptr)
@@ -4204,6 +4206,8 @@ OPTION(prefix_1, &"-stack-protector"[1], stack_protector, Separate, INVALID, INV
        "Enable stack protectors", nullptr, "0,1,2,3")
 OPTION(prefix_1, &"-stack-usage-file"[1], stack_usage_file, Separate, INVALID, INVALID, nullptr, CC1Option | NoDriverOption, 0,
        "Filename (or -) to write stack usage output to", nullptr, nullptr)
+OPTION(prefix_3, &"--start-no-unused-arguments"[2], start_no_unused_arguments, Flag, INVALID, INVALID, nullptr, CoreOption, 0,
+       "Don't emit warnings about unused arguments for the following arguments", nullptr, nullptr)
 OPTION(prefix_1, &"-static-define"[1], static_define, Flag, INVALID, INVALID, nullptr, CC1Option | NoDriverOption, 0,
        "Should __STATIC__ be defined", nullptr, nullptr)
 OPTION(prefix_1, &"-static-libgcc"[1], static_libgcc, Flag, INVALID, INVALID, nullptr, 0, 0, nullptr, nullptr, nullptr)

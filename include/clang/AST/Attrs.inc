@@ -6803,19 +6803,25 @@ public:
 private:
   DevTypeTy devType;
 
+Expr * indirectExpr;
+
+bool indirect;
+
 unsigned level;
 
 public:
   // Factory methods
-  static OMPDeclareTargetDeclAttr *CreateImplicit(ASTContext &Ctx, MapTypeTy MapType, DevTypeTy DevType, unsigned Level, const AttributeCommonInfo &CommonInfo = {SourceRange{}});
-  static OMPDeclareTargetDeclAttr *Create(ASTContext &Ctx, MapTypeTy MapType, DevTypeTy DevType, unsigned Level, const AttributeCommonInfo &CommonInfo);
-  static OMPDeclareTargetDeclAttr *CreateImplicit(ASTContext &Ctx, MapTypeTy MapType, DevTypeTy DevType, unsigned Level, SourceRange Range, AttributeCommonInfo::Syntax Syntax);
-  static OMPDeclareTargetDeclAttr *Create(ASTContext &Ctx, MapTypeTy MapType, DevTypeTy DevType, unsigned Level, SourceRange Range, AttributeCommonInfo::Syntax Syntax);
+  static OMPDeclareTargetDeclAttr *CreateImplicit(ASTContext &Ctx, MapTypeTy MapType, DevTypeTy DevType, Expr * IndirectExpr, bool Indirect, unsigned Level, const AttributeCommonInfo &CommonInfo = {SourceRange{}});
+  static OMPDeclareTargetDeclAttr *Create(ASTContext &Ctx, MapTypeTy MapType, DevTypeTy DevType, Expr * IndirectExpr, bool Indirect, unsigned Level, const AttributeCommonInfo &CommonInfo);
+  static OMPDeclareTargetDeclAttr *CreateImplicit(ASTContext &Ctx, MapTypeTy MapType, DevTypeTy DevType, Expr * IndirectExpr, bool Indirect, unsigned Level, SourceRange Range, AttributeCommonInfo::Syntax Syntax);
+  static OMPDeclareTargetDeclAttr *Create(ASTContext &Ctx, MapTypeTy MapType, DevTypeTy DevType, Expr * IndirectExpr, bool Indirect, unsigned Level, SourceRange Range, AttributeCommonInfo::Syntax Syntax);
 
   // Constructors
   OMPDeclareTargetDeclAttr(ASTContext &Ctx, const AttributeCommonInfo &CommonInfo
               , MapTypeTy MapType
               , DevTypeTy DevType
+              , Expr * IndirectExpr
+              , bool Indirect
               , unsigned Level
              );
 
@@ -6835,6 +6841,14 @@ public:
 
   static bool ConvertStrToDevTypeTy(StringRef Val, DevTypeTy &Out);
   static const char *ConvertDevTypeTyToStr(DevTypeTy Val);
+  Expr * getIndirectExpr() const {
+    return indirectExpr;
+  }
+
+  bool getIndirect() const {
+    return indirect;
+  }
+
   unsigned getLevel() const {
     return level;
   }

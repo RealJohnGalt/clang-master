@@ -17157,39 +17157,43 @@ const char *OMPDeclareSimdDeclAttr::getSpelling() const {
 
 // OMPDeclareTargetDeclAttr implementation
 
-OMPDeclareTargetDeclAttr *OMPDeclareTargetDeclAttr::CreateImplicit(ASTContext &Ctx, MapTypeTy MapType, DevTypeTy DevType, unsigned Level, const AttributeCommonInfo &CommonInfo) {
-  auto *A = new (Ctx) OMPDeclareTargetDeclAttr(Ctx, CommonInfo, MapType, DevType, Level);
+OMPDeclareTargetDeclAttr *OMPDeclareTargetDeclAttr::CreateImplicit(ASTContext &Ctx, MapTypeTy MapType, DevTypeTy DevType, Expr * IndirectExpr, bool Indirect, unsigned Level, const AttributeCommonInfo &CommonInfo) {
+  auto *A = new (Ctx) OMPDeclareTargetDeclAttr(Ctx, CommonInfo, MapType, DevType, IndirectExpr, Indirect, Level);
   A->setImplicit(true);
   if (!A->isAttributeSpellingListCalculated() && !A->getAttrName())
     A->setAttributeSpellingListIndex(0);
   return A;
 }
 
-OMPDeclareTargetDeclAttr *OMPDeclareTargetDeclAttr::Create(ASTContext &Ctx, MapTypeTy MapType, DevTypeTy DevType, unsigned Level, const AttributeCommonInfo &CommonInfo) {
-  auto *A = new (Ctx) OMPDeclareTargetDeclAttr(Ctx, CommonInfo, MapType, DevType, Level);
+OMPDeclareTargetDeclAttr *OMPDeclareTargetDeclAttr::Create(ASTContext &Ctx, MapTypeTy MapType, DevTypeTy DevType, Expr * IndirectExpr, bool Indirect, unsigned Level, const AttributeCommonInfo &CommonInfo) {
+  auto *A = new (Ctx) OMPDeclareTargetDeclAttr(Ctx, CommonInfo, MapType, DevType, IndirectExpr, Indirect, Level);
   if (!A->isAttributeSpellingListCalculated() && !A->getAttrName())
     A->setAttributeSpellingListIndex(0);
   return A;
 }
 
-OMPDeclareTargetDeclAttr *OMPDeclareTargetDeclAttr::CreateImplicit(ASTContext &Ctx, MapTypeTy MapType, DevTypeTy DevType, unsigned Level, SourceRange Range, AttributeCommonInfo::Syntax Syntax) {
+OMPDeclareTargetDeclAttr *OMPDeclareTargetDeclAttr::CreateImplicit(ASTContext &Ctx, MapTypeTy MapType, DevTypeTy DevType, Expr * IndirectExpr, bool Indirect, unsigned Level, SourceRange Range, AttributeCommonInfo::Syntax Syntax) {
   AttributeCommonInfo I(Range, NoSemaHandlerAttribute, Syntax);
-  return CreateImplicit(Ctx, MapType, DevType, Level, I);
+  return CreateImplicit(Ctx, MapType, DevType, IndirectExpr, Indirect, Level, I);
 }
 
-OMPDeclareTargetDeclAttr *OMPDeclareTargetDeclAttr::Create(ASTContext &Ctx, MapTypeTy MapType, DevTypeTy DevType, unsigned Level, SourceRange Range, AttributeCommonInfo::Syntax Syntax) {
+OMPDeclareTargetDeclAttr *OMPDeclareTargetDeclAttr::Create(ASTContext &Ctx, MapTypeTy MapType, DevTypeTy DevType, Expr * IndirectExpr, bool Indirect, unsigned Level, SourceRange Range, AttributeCommonInfo::Syntax Syntax) {
   AttributeCommonInfo I(Range, NoSemaHandlerAttribute, Syntax);
-  return Create(Ctx, MapType, DevType, Level, I);
+  return Create(Ctx, MapType, DevType, IndirectExpr, Indirect, Level, I);
 }
 
 OMPDeclareTargetDeclAttr::OMPDeclareTargetDeclAttr(ASTContext &Ctx, const AttributeCommonInfo &CommonInfo
               , MapTypeTy MapType
               , DevTypeTy DevType
+              , Expr * IndirectExpr
+              , bool Indirect
               , unsigned Level
              )
   : InheritableAttr(Ctx, CommonInfo, attr::OMPDeclareTargetDecl, false, false)
               , mapType(MapType)
               , devType(DevType)
+              , indirectExpr(IndirectExpr)
+              , indirect(Indirect)
               , level(Level)
   {
 }
@@ -17240,8 +17244,12 @@ const char *OMPDeclareTargetDeclAttr::ConvertDevTypeTyToStr(DevTypeTy Val) {
 }
 
 
+
+
+
+
 OMPDeclareTargetDeclAttr *OMPDeclareTargetDeclAttr::clone(ASTContext &C) const {
-  auto *A = new (C) OMPDeclareTargetDeclAttr(C, *this, mapType, devType, level);
+  auto *A = new (C) OMPDeclareTargetDeclAttr(C, *this, mapType, devType, indirectExpr, indirect, level);
   A->Inherited = Inherited;
   A->IsPackExpansion = IsPackExpansion;
   A->setImplicit(Implicit);
